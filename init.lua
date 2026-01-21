@@ -1,14 +1,17 @@
 vim.g.mapleader = " "
 require("core.lazy")
 vim.o.number = true   
-vim.o.relativenumber = false  
+vim.o.relativenumber = true  
 vim.cmd("syntax on")
 --require("lualine").setup()
 vim.o.termguicolors = true
 vim.opt.shortmess:append("sI")
 require("lazy").setup("plugins")
-vim.cmd.colorscheme("everforest")
+vim.cmd.colorscheme("tokyonight")
 require("core.keymaps")
+
+-- Global copy to system clipboard with space+y
+vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
 vim.api.nvim_set_keymap('n', '!', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 -- move to prev tab
 vim.keymap.set('n', '<S-h>', '<Cmd>BufferPrevious<CR>', { desc = 'prev buffer' })

@@ -1,0 +1,13 @@
+---
+# Clang-Format configuration for C/C++ files
+BasedOnStyle: LLVM
+ColumnLimit: 90
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+BreakBeforeBraces: Attach
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+IndentCaseLabels: true
+PointerAlignment: Left
