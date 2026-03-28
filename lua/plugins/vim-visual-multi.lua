@@ -4,16 +4,13 @@ return {
   branch = "master",
   lazy = false,
   init = function()
-    -- Configure vim-visual-multi settings before the plugin loads
-    -- Use Ctrl-Down and Ctrl-Up to add cursors vertically
-    -- Use Ctrl-n to select next occurrence of word under cursor
-    -- Use q to skip current and get next occurrence
-    -- Use Q to remove current cursor/selection
+    -- Ctrl+j: add cursor down
+    -- Ctrl+k: add cursor up
+    -- Ctrl+n: select word occurrences
+    
     vim.g.VM_maps = {
-      ["Find Under"] = "<C-n>",
-      ["Find Subword Under"] = "<C-n>",
-      ["Add Cursor Down"] = "<C-Down>",
-      ["Add Cursor Up"] = "<C-Up>",
+      ["Add Cursor Down"] = "<C-j>",
+      ["Add Cursor Up"] = "<C-k>",
     }
   end,
 }
