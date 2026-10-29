@@ -6,8 +6,7 @@ vim.cmd("syntax on")
 --require("lualine").setup()
 vim.o.termguicolors = true
 vim.opt.shortmess:append("sI")
-require("lazy").setup("plugins")
-vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("gruvbox-material")
 require("core.keymaps")
 
 -- Global copy to system clipboard with space+y
@@ -43,5 +42,7 @@ vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
 vim.keymap.set('n', '<A-Up>', ':m .-2<CR>==', { noremap = true, silent = true })
 -- ctrl + down to move line down
 vim.keymap.set('n', '<A-Down>', ':m .+1<CR>==', { noremap = true, silent = true })
-require("plugins.minimap")
 
+vim.o.cursorline = true
+vim.o.winborder = "rounded" -- hover, signature help and other LSP popups
+require("core.vscode_keys")

@@ -14,19 +14,24 @@ return {
         component_separators = { left = '', right = ''}, -- Nerd Font symbols
         section_separators = { left = '', right = ''},   -- Nerd Font symbols
         disabled_filetypes = {
-          statusline = {'NvimTree', 'dashboard'}, -- Disable lualine for these filetypes
+          statusline = {'NvimTree', 'dashboard', 'snacks_dashboard'}, -- Disable lualine for these filetypes
           winbar = {'NvimTree'},
         },
         icons_enabled = true,
         always_divide_middle = true,
         globalstatus = true, -- Single statusline for all windows (Neovim 0.7+)
-      }, tabline = {lualine_a = {'buffers'}},
+      },
       sections = {
         lualine_a = {'mode'},
         lualine_b = {
           'branch', -- Git branch
-          'diff',   -- Git diff status (add, modified, removed lines)
-                    -- For full functionality, plugins like 'gitsigns.nvim' are helpful.
+          {
+            'diff', -- counts come from gitsigns so they match the gutter markers
+            source = function()
+              local g = vim.b.gitsigns_status_dict
+              if g then return { added = g.added, modified = g.changed, removed = g.removed } end
+            end,
+          },
           {
             'diagnostics',
             sources = {"nvim_lsp", "nvim_diagnostic"}, -- Sources for diagnostics
@@ -62,18 +67,24 @@ return {
             show = true,
             timeout = 500,
           },
-          'encoding',
-          'fileformat',
-          'filetype',              -- Filetype icon and name (requires nvim-web-devicons)
           {
-            'lsp_progress',        -- Show LSP progress messages (e.g., "LSP: Indexing...")
-            display_components = {'lsp_client_name', 'progress'},
-            timer = { progress_enddelay = 500, spinner = true },
-            colors = { -- Custom colors for LSP progress if needed
-              -- LSPServerName = { fg = '#A0A0A0' },
-              -- LSPProgress = { fg = '#A0A0A0' },
-            }
-          }
+            -- Last <space>c build: ✓ / ✗ / …
+            function()
+              return ({ ok = "󰄬 build", failed = "󰅖 build", building = "󰔟 build" })[vim.g.build_status]
+            end,
+            cond = function() return vim.g.build_status ~= nil end,
+            color = function()
+              return { fg = ({ ok = "#a9b665", failed = "#ea6962", building = "#d8a657" })[vim.g.build_status] }
+            end,
+          },
+          {
+            -- Debugger state while a session is running
+            function() return " " .. require("dap").status() end,
+            cond = function() return package.loaded.dap ~= nil and require("dap").status() ~= "" end,
+            color = { fg = "#e78a4e" },
+          },
+          'filetype',
+          { 'lsp_status', icon = "" }, -- attached language servers (e.g. clangd)
         },
         lualine_y = {'progress'},    -- Percentage through the file (e.g., "75%")
         lualine_z = {

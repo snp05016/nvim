@@ -41,6 +41,7 @@ require("lazy").setup("plugins", {
       },
     },
   },
+  ui = { border = "rounded" },
   -- You can add a UI for lazy.nvim, for example:
   -- ui = {
   --   border = "rounded", -- or "single", "double", "shadow"

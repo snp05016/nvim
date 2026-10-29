@@ -2,7 +2,13 @@ return {
   '3rd/image.nvim',
   opts = {
     backend = 'kitty',  -- change to 'iterm2' if using iTerm2, or 'ueberzug' for other terminals
-    integrations = {},
+    integrations = {
+      markdown = { enabled = false },
+      neorg = { enabled = false },
+      typst = { enabled = false },
+      html = { enabled = false },
+      css = { enabled = false },
+    },
     max_width = nil,
     max_height = nil,
     max_width_window_percentage = nil,

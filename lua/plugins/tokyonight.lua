@@ -1,8 +1,7 @@
 -- ~/.config/nvim/lua/plugins/tokyonight.lua
 return {
   "folke/tokyonight.nvim",
-  lazy = false,
-  priority = 1000,
+  lazy = true, -- available via :colorscheme tokyonight
   config = function()
     require("tokyonight").setup({
       style = "night", -- "storm", "moon", "night", or "day"
@@ -24,7 +23,6 @@ return {
         -- Customize specific highlight groups if needed
       end,
     })
-    
-    vim.cmd.colorscheme("tokyonight")
+
   end,
 }

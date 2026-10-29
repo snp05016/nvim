@@ -1,7 +1,7 @@
 -- ~/.config/nvim/lua/plugins/everforest.lua
 return {
   "sainnhe/everforest", -- Or "neanias/everforest-nvim" if you prefer the pure Lua version
-  lazy = false,         -- Load the colorscheme at startup
+  lazy = true,          -- available via :colorscheme everforest
   priority = 1000,      -- Ensure it loads before other UI plugins
   config = function()
     -- Set your preferred Everforest background style: 'soft', 'medium', or 'hard'
@@ -12,11 +12,11 @@ return {
 
     -- You can add other Everforest-specific settings here, for example:
     -- vim.g.everforest_cursor = "orange"
-    -- vim.g.everforest_transparent_background = 1 -- For a transparent background
+    vim.g.everforest_transparent_background = 1 -- keep the see-through look tokyonight had
+    vim.g.everforest_better_performance = 1
+
 
     -- Apply the colorscheme
-    vim.cmd.colorscheme "everforest"
-
     -- If using 'neanias/everforest-nvim', the setup might look like this instead:
     -- require("everforest").setup({
     --   background = "medium",

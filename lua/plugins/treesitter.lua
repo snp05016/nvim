@@ -1,14 +1,29 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  lazy = false,
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = { "c", "cpp", "lua", "python", "vim", "bash" }, -- add ur langs here
-      highlight = {
-        enable = true, -- turn this shit on
-        additional_vim_regex_highlighting = false,
-      },
+    local treesitter = require("nvim-treesitter")
+    local parsers = {
+      "bash",
+      "c",
+      "cpp",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "vim",
+    }
+
+    treesitter.setup({})
+    treesitter.install(parsers)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "sh", "c", "cpp", "lua", "markdown", "python", "vim" },
+      callback = function()
+        vim.treesitter.start()
+      end,
     })
   end,
 }
-
